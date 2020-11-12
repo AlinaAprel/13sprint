@@ -3,21 +3,26 @@ const path = require('path');
 const PORT = 3000;
 const app = express();
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 const routerCards = require('./routes/card.js');
-const routerUsers = require('./routes/user.js');
-const routerUsersId = require('./routes/userId.js');
+const { routerUsers, routerUserId, routerCreateUsers } = require('./routes/user');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
   useCreateIndex: true,
-    useFindAndModify: false
+  useFindAndModify: false,
+  useUnifiedTopology: true
 })
 .then(()=> console.log('Mongo has started'))
 .catch(err => console.log(err))
 
 app.use('/', routerCards);
-app.use('/', routerUsers);
-app.use('/', routerUsersId);
+app.use('/users', routerUsers);
+app.use('/users', routerCreateUsers);
+app.use('/users/:userId', routerUserId);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
