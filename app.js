@@ -5,7 +5,10 @@ const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const routerCards = require('./routes/card.js');
-const { routerUsers, routerUserId, routerCreateUsers } = require('./routes/user');
+// const routerUsers = require('./routes/user');
+// const routerUsersId = require('./routes/user');
+// const routerUsersCreate = require('./routes/user');
+const router = require('./routes/user')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -20,9 +23,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 .catch(err => console.log(err))
 
 app.use('/', routerCards);
-app.use('/users', routerUsers);
-app.use('/users', routerCreateUsers);
-app.use('/users/:userId', routerUserId);
+app.use('/users', router)
 
 app.use(express.static(path.join(__dirname, 'public')));
 

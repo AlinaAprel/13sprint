@@ -1,7 +1,7 @@
 const { ObjectId } = require('bson');
 const mongoose = require('mongoose');
 
-const cardSchema = mongoose.Schema({
+const Card = mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -27,5 +27,5 @@ const cardSchema = mongoose.Schema({
   }
 });
 
-module.export = mongoose.model('card', cardSchema);
+module.export = mongoose.model('card', Card);
 
