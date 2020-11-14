@@ -1,5 +1,5 @@
-## Express and API
-### Проект создан для обучения express и началу API
+## Mongodb
+### Проект для изучения mongodb
 ## Инструкция по сборке проекта | Project building instruction
 ### Команда для установки всех зависимостей | Command to install all dependencies :
 #### npm install
@@ -9,3 +9,5 @@
 #### npm run start
 ### Команда для автоматического обновления при сохранении | Server start command  :
 #### npm run dev
+### Команда для запуска mongodb | Mongodb start command
+#### start-db
