@@ -1,5 +1,7 @@
-const { ObjectId } = require('bson');
 const mongoose = require('mongoose');
+const { ObjectId } = require('bson');
+const validator = require('validator');
+const { response } = require('express');
 
 const Card = mongoose.Schema({
   name: {
@@ -11,11 +13,19 @@ const Card = mongoose.Schema({
   link: {
     type: String,
     required: true,
+    validate: {
+      validator: (link) => {
+        if(validator.isEmail(link) === false) {
+          message: `Ваша ссылка неверна`
+        } else {
+          message: `Ваша ссылка верна`
+        }
+      }
+    }
   },
   owner: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: 'user'
+    type: ObjectId,
+    required: true
   },
   likes: {
     type: ObjectId,
@@ -27,5 +37,4 @@ const Card = mongoose.Schema({
   }
 });
 
-module.export = mongoose.model('card', Card);
-
+module.exports = mongoose.model('card', Card)

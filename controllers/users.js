@@ -10,20 +10,6 @@ module.exports.getUsers = (req, res) => {
   })
 };
 
-// module.exports.getUserId = (req, res) => {
-//   User.findById(req.params.id)
-//   .then((data) => {
-//     const users = JSON.parse(data);------
-//     const userId = users.find((item) => item._id === req.params.id);
-//     if(!userId) {
-//       res.status(404).json({message: `Нет пользователя с таким id`})
-//       return;
-//     } else {
-//       res.status(200).json(userId)
-//     }
-//   })
-// };
-
 module.exports.getUserId = (req, res) => {
   User.findById(req.params.userId)
   .then(user => res.status(200).send({ data: user}))
@@ -34,5 +20,5 @@ module.exports.createUsers = (req, res) => {
   const { name, about, avatar } = req.body;
   User.create({ name, about, avatar })
   .then(user => res.send({data: user}))
-  .catch(err => res.status(500).send({message: `Произошла ошибка при создании ${err}`}))
+  .catch(err => res.status(500).send({message: `Произошла ошибка при создании user ${err}`}))
 };

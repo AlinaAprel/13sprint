@@ -32,6 +32,7 @@
     "express": "^4.17.1",
     "install": "^0.13.0",
     "mongoose": "^5.10.13",
-    "normalize-port": "^1.0.0"
+    "normalize-port": "^1.0.0",
+    "validator": "^13.1.17"
   }
 }

@@ -4,11 +4,8 @@ const PORT = 3000;
 const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const routerCards = require('./routes/card.js');
-// const routerUsers = require('./routes/user');
-// const routerUsersId = require('./routes/user');
-// const routerUsersCreate = require('./routes/user');
-const router = require('./routes/user')
+const router = require('./routes/user');
+const routerCards = require('./routes/card');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,8 +19,16 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 .then(()=> console.log('Mongo has started'))
 .catch(err => console.log(err))
 
-app.use('/', routerCards);
-app.use('/users', router)
+app.use((req, res, next) => {
+  req.user = {
+      _id: '5faeb9960acaf6063285dc8f'
+  };
+  next();
+});
+app.use('/cards', routerCards);
+app.use('/users', router);
+
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 
