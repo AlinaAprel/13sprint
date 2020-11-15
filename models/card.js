@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+// eslint-disable-next-line import/no-extraneous-dependencies
 const { ObjectId } = require('bson');
 const validator = require('validator');
 
@@ -7,7 +8,7 @@ const Card = mongoose.Schema({
     type: String,
     required: true,
     minlength: 2,
-    maxlength: 30
+    maxlength: 30,
   },
   link: {
     type: String,
@@ -17,20 +18,20 @@ const Card = mongoose.Schema({
       protocols: ['http', 'https', 'ftp'],
       require_tld: true,
       require_protocol: true,
-    })
+    }),
   },
   owner: {
     type: ObjectId,
-    required: true
+    required: true,
   },
   likes: {
     type: ObjectId,
-    default: null
+    default: null,
   },
   createdAd: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
-module.exports = mongoose.model('card', Card)
+module.exports = mongoose.model('card', Card);

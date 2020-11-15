@@ -6,4 +6,3 @@ router.get('/:userId', getUserId);
 router.post('/', createUsers);
 
 module.exports = router;
-
