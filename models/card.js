@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const { ObjectId } = require('bson');
 const validator = require('validator');
-const { response } = require('express');
 
 const Card = mongoose.Schema({
   name: {
@@ -13,15 +12,12 @@ const Card = mongoose.Schema({
   link: {
     type: String,
     required: true,
-    validate: {
-      validator: (link) => {
-        if(validator.isEmail(link) === false) {
-          message: `Ваша ссылка неверна`
-        } else {
-          message: `Ваша ссылка верна`
-        }
-      }
-    }
+    validate: (value) => validator.isURL(value, {
+      message: 'Ваша ссылка не валидна',
+      protocols: ['http', 'https', 'ftp'],
+      require_tld: true,
+      require_protocol: true,
+    })
   },
   owner: {
     type: ObjectId,

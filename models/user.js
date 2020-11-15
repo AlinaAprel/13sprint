@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const validator = require('validator');
 
 const User = mongoose.Schema({
   name: {
@@ -15,7 +16,13 @@ const User = mongoose.Schema({
   },
   avatar: {
     type: String,
-    required: true
+    required: true,
+    validate: (value) => validator.isURL(value, {
+      message: 'Ваша ссылка не валидна',
+      protocols: ['http', 'https', 'ftp'],
+      require_tld: true,
+      require_protocol: true,
+    })
   }
 })
 
