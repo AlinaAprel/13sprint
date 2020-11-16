@@ -27,7 +27,7 @@ module.exports.deleteCard = (req, res) => {
     .catch((err) => {
       if (err.name === 'CastError') {
         res.status(400).send({ message: 'Переданы некорректные данные' });
-      } else if (err.name === 'NotFound') {
+      } else if (err.message === 'NotFound') {
         res.status(404).send({ message: 'Объект не найден' });
       } else {
         res.status(500).send({ message: 'Ошибка сервера' });
